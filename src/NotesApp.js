@@ -11,6 +11,7 @@ class NotesApp extends React.Component {
     constructor(props) {
         super(props);
         this.state={
+            currentNoteId: '',
             searchText: 'this is the search text',
             notes: [
                 {
@@ -42,6 +43,7 @@ class NotesApp extends React.Component {
                  />
                 <NotesList 
                     notes={this.state.notes}
+                    handleClick={this._selectNote}
                 />
                 <NoteEditor />
                 
@@ -55,6 +57,14 @@ class NotesApp extends React.Component {
             searchText
         }, () => {
             console.log('New search')
+        })
+    }
+
+    _selectNote = (currentNoteId) => {
+        this.setState({
+            currentNoteId
+        }, () => {
+            console.log('Updated current id')
         })
     }
 }

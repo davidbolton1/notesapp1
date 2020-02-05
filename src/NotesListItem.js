@@ -1,10 +1,17 @@
 import React from 'react';
 const NotesListItem = ({
     title,
-    id
+    id,
+    handleClick
 })  => {
     return (
-        <li>{title}</li>
+        <li
+            onClick={() => {
+                console.log(`You clicked ${id}`)
+                handleClick(id)
+            }}>
+            {title}
+            </li>
     );
 }
 

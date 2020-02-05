@@ -2,7 +2,8 @@ import React from 'react';
 import NotesListItem from './NotesListItem';
 
 const NotesList = ({
-   notes 
+   notes,
+   handleClick
 }) => {
     return (
         <ul>
@@ -13,6 +14,8 @@ const NotesList = ({
                     title={note.title} 
                     id={note.id} 
                     key={note.id}
+                    handleClick={handleClick}
+                    //onClick={() => {handleClick(note.id)}}
                     />
                     )
                 )
