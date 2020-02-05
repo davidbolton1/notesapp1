@@ -14,10 +14,11 @@ import React from 'react'
         value={text} />
     )
 }
-
+/*
 SearchBar.defaultProps = {
     text: 'this is dfault'
 }
+*/
 
 
 export default SearchBar;
