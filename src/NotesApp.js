@@ -11,7 +11,24 @@ class NotesApp extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-            searchText: 'this is the search text'
+            searchText: 'this is the search text',
+            notes: [
+                {
+                    id: 'an id',
+                    title: 'first note',
+                    copy: 'asdf'
+                },
+                {
+                    id: 'an id2',
+                    title: 'second note',
+                    copy: 'aadf'
+                },
+                {
+                    id: 'an id3',
+                    title: 'second note',
+                    copy: 'aadf'
+                }
+            ]
         }
     }
     render() {
@@ -23,7 +40,9 @@ class NotesApp extends React.Component {
                 text={this.state.searchText}
                 handleChange={this._setSearchText}
                  />
-                <NotesList />
+                <NotesList 
+                    notes={this.state.notes}
+                />
                 <NoteEditor />
                 
             </div>

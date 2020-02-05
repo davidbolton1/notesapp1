@@ -1,14 +1,22 @@
 import React from 'react';
 import NotesListItem from './NotesListItem';
 
-
-function NotesList() {
+const NotesList = ({
+   notes 
+}) => {
     return (
         <ul>
-            <NotesListItem />
-            <NotesListItem />
-
-
+            {
+                notes.map(note => 
+                    (
+                    <NotesListItem 
+                    title={note.title} 
+                    id={note.id} 
+                    key={note.id}
+                    />
+                    )
+                )
+            }
         </ul>
     )
 }

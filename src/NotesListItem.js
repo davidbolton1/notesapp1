@@ -1,8 +1,10 @@
 import React from 'react';
-
-function NotesListItem() {
+const NotesListItem = ({
+    title,
+    id
+})  => {
     return (
-        <li>This is an item</li>
+        <li>{title}</li>
     );
 }
 
