@@ -36,7 +36,9 @@ class NotesApp extends React.Component {
 				<h1> Best Notes App Ever</h1>
 				<NewNote />
 				<SearchBar text={this.state.searchText} handleChange={this._setSearchText} />
-				<NotesList notes={this._getFilteredNotes()} handleClick={this._selectNote} />
+				<NotesList 
+				notes={this._getFilteredNotes()} 
+				handleClick={this._selectNote} />
 				<NoteEditor
 					note={this._getNoteById()}
 					handleChange={this._updateNote}
