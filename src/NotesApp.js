@@ -39,15 +39,13 @@ class NotesApp extends React.Component {
 				<NotesList notes={this._getFilteredNotes()} handleClick={this._selectNote} />
 				<NoteEditor
 					note={this._getNoteById()}
+					handleChange={this._updateNote}
 				/>
 			</div>
 		);
 	}
 
-	_getNoteById = () => this.state.notes.find(note => this.state.currentNoteId || {}
-		);
-		
-	
+	_getNoteById = () => this.state.notes.find(note => note.id === this.state.currentNoteId) || {}
 
 
 	_getFilteredNotes = () => {
@@ -84,10 +82,23 @@ class NotesApp extends React.Component {
 		);
 	};
 
-	_updateNote = () => {
+	_updateNote = (changedNote) => {
+		// Alternative
+		// const updatedNotesArray = [...this.state.notes];
+		// const theIndex = updatedNotesSarray.findIndex(note => note.id == changedNote.id)
+		//updatedNotesArray[theIndex] = changedNote
 		this.setState ({
-
+			notes: this.state.notes.map(note => {
+				if (note.id !== this.state.currentNoteId) {
+					return note;
+				} else {
+					return changedNote;
+				}
+			})
+		}, () => {
+			console.log(`Updated ${changedNote.id}`)
 		})
+		
 	}
    
 }
