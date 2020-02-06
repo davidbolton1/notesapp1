@@ -8,6 +8,21 @@ class NoteEditor extends React.Component {
   
     this.state = {
         changedNote: {
+            
+        }
+    }
+}
+//Receiving the new props and the existing state
+static getDerivedStateFromProps(props, state) {
+    // Return the new version of state
+    if (props.note.id === state.changedNote.id) {
+        return {
+            ...state
+        }
+    }
+    return {
+        ...state,
+        changedNote: {
             ...props.note
         }
     }
@@ -22,7 +37,7 @@ class NoteEditor extends React.Component {
         return (
             <div>
                 <input 
-                    value={note.title} 
+                    value={this.state.changedNote.title} 
                     onChange={(event) => {
                         // NOOOOOOOOO!
                         // Don't mutate an object or array
@@ -31,24 +46,30 @@ class NoteEditor extends React.Component {
                         
                         // Instead, send back a copy
                         // with the updated "title" 
-                        handleChange({
-                            ...note,
+                        this._updateLocalNote({
+                            ...this.state.changedNote,
                             title: event.target.value
                         });
                     }}
                 />
                 <br />
                 <textarea 
-                    value={note.copy} 
+                    value={this.state.changedNote.copy} 
                     onChange={(event) => {
-                        handleChange({
-                            ...note,
+                        this._updateLocalNote({
+                            ...this.state.changedNote,
                             copy: event.target.value
                         });
                     }}
                 />
             </div>
         );
+    }
+
+    _updateLocalNote = (changedNote) => {
+        this.setState({
+            changedNote
+        });
     }
 }
 
