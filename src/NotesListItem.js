@@ -7,8 +7,9 @@ const NotesListItem = ({
     return (
         <li
             onClick={() => {
-                console.log(`You clicked ${id}`)
+                //console.log(`${title}`)
                 handleClick(id)
+                //handleClick(title)
             }}>
             {title}
             </li>

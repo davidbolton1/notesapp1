@@ -2,82 +2,94 @@ import React from 'react';
 import NewNote from './NewNote';
 import NotesList from './NotesList';
 import NoteEditor from './NoteEditor';
-import SearchBar from './SearchBar'
-
-
+import SearchBar from './SearchBar';
 
 class NotesApp extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			currentNoteId: '',
+			currentNoteTitle: '',
+			searchText: '',
+			notes: [
+				{
+					id: 'an id',
+					title: 'first note',
+					copy: 'asdf'
+				},
+				{
+					id: 'an id2',
+					title: 'second note',
+					copy: 'aaddddddddf'
+				},
+				{
+					id: 'an id3',
+					title: 'third note',
+					copy: 'aa12222321112121212df'
+				}
+			]
+		};
+	}
+	render() {
+		return (
+			<div>
+				<h1> Best Notes App Ever</h1>
+				<NewNote />
+				<SearchBar text={this.state.searchText} handleChange={this._setSearchText} />
+				<NotesList notes={this._getFilteredNotes()} handleClick={this._selectNote} />
+				<NoteEditor
+					note={this._getNoteById()}
+				/>
+			</div>
+		);
+	}
 
-    constructor(props) {
-        super(props);
-        this.state={
-            currentNoteId: '',
-            searchText: '',
-            notes: [
-                {
-                    id: 'an id',
-                    title: 'first note',
-                    copy: 'asdf'
-                },
-                {
-                    id: 'an id2',
-                    title: 'second note',
-                    copy: 'aaddddddddf'
-                },
-                {
-                    id: 'an id3',
-                    title: 'second note',
-                    copy: 'aa12222321112121212df'
-                }
-            ]
-        }
-    }
-    render() {
-        return (
-            <div>
-                <h1> Best Notes App Ever</h1>
-                <NewNote />
-                <SearchBar
-                text={this.state.searchText}
-                handleChange={this._setSearchText}
-                 />
-                <NotesList 
-                    notes={this._getFilteredNotes()}
-                    handleClick={this._selectNote}
-                />
-                <NoteEditor />
-                
-            </div>
-        )
-    }
+	_getNoteById = () => this.state.notes.find(note => this.state.currentNoteId || {}
+		);
+		
+	
 
-    _getFilteredNotes = () => {
-        const filteredArray = this.state.notes.filter(note => {
-            const titleDoesMatch = note.title.toLowerCase().includes(this.state.searchText.toLowerCase());
-            const copyDoesMatch = note.copy.toLowerCase().includes(this.state.searchText.toLowerCase());
 
-            return titleDoesMatch || copyDoesMatch;
-        });
+	_getFilteredNotes = () => {
+		const filteredArray = this.state.notes.filter((note) => {
+			const titleDoesMatch = note.title.toLowerCase().includes(this.state.searchText.toLowerCase());
+			const copyDoesMatch = note.copy.toLowerCase().includes(this.state.searchText.toLowerCase());
 
-        return filteredArray;
-    }
+			return titleDoesMatch || copyDoesMatch;
+		});
 
-    _setSearchText = (searchText) => {
-        this.setState({
-            //searchText: searchText
-            searchText
-        }, () => {
-            console.log('New search')
-        })
-    }
+		return filteredArray;
+	};
 
-    _selectNote = (currentNoteId) => {
-        this.setState({
-            currentNoteId
-        }, () => {
-            console.log('Updated current id')
-        })
-    }
+	_setSearchText = (searchText) => {
+		this.setState(
+			{
+				//searchText: searchText
+				searchText
+			},
+			() => {
+				console.log('New search');
+			}
+		);
+	};
+
+	_selectNote = (currentNoteId) => {
+		this.setState(
+			{
+				currentNoteId
+			},
+			() => {
+				console.log(`${currentNoteId}`);
+			}
+		);
+	};
+
+	_updateNote = () => {
+		this.setState ({
+
+		})
+	}
+   
 }
 
 export default NotesApp;
